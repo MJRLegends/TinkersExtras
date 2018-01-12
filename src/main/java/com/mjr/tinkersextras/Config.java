@@ -16,7 +16,7 @@ public class Config {
 	public static void load() {
 		Configuration config = new Configuration(new File("config/TinkersExtras.cfg"));
 		config.load();
-		materialListRemoval = config.getStringList("Remove Materals/Parts List", Configuration.CATEGORY_GENERAL, new String[0], "Use material name. Example: paper");
+		materialListRemoval = config.getStringList("Remove Materials/Parts List", Configuration.CATEGORY_GENERAL, new String[0], "Use material name. Example: paper");
 		
 		disableReplacingList = config.getStringList("List of Materials That Cant Be Used As Replacements", Configuration.CATEGORY_GENERAL, new String[0], "Use material name. Example: stone");
 		disableReplacing = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Replace All Parts", false, "Will stop all Parts from being replaceable").getBoolean(false);
