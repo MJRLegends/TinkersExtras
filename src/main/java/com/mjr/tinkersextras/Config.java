@@ -12,7 +12,9 @@ public class Config {
 	public static boolean disableModifying;
 	public static String[] disablePartCreationList;
 	public static boolean disablePartCreation;
-
+	public static String[] disableToolCreationList;
+	public static boolean disableToolCreation;
+	
 	public static void load() {
 		Configuration config = new Configuration(new File("config/TinkersExtras.cfg"));
 		config.load();
@@ -27,6 +29,9 @@ public class Config {
 		disablePartCreationList = config.getStringList("List of Part That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use material name. Example: stone");
 		disablePartCreation = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Create All Parts", false, "Will only disable the creation not the existing of the parts").getBoolean(false);
 
+		disableToolCreationList = config.getStringList("List of Tool Types That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use tool type. Example: pickaxe");
+		disableToolCreation = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Create All Tools", false, "Will disable the creation of all tools via a tool station/forge").getBoolean(false);
+		
 		config.save();
 	}
 }

@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.events.MaterialEvent.IntegrationEvent;
 import slimeknights.tconstruct.library.events.MaterialEvent.MaterialRegisterEvent;
+import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolCraftingEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolModifyEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolPartCraftingEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolPartReplaceEvent;
@@ -76,6 +77,21 @@ public class EventHandlerMain {
 			for (String temp : Config.disablePartCreationList) {
 				if (material.getIdentifier().equalsIgnoreCase(temp)) {
 					event.setCanceled("You can not use " + material.getLocalizedName() + " for parts creation as its been disabled!");
+					return;
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onToolCrafting(ToolCraftingEvent event) {
+		if (Config.disableToolCreation) {
+			event.setCanceled("Creation of tools has been disabled!");
+			return;
+		} else {
+			for (String temp : Config.disableToolCreationList) {
+				if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
+					event.setCanceled("You can not create a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
 					return;
 				}
 			}
