@@ -80,6 +80,12 @@ public class EventHandlerMain {
 					return;
 				}
 			}
+			for (String temp : Config.disablePartTypeCreationList) {
+				if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
+					event.setCanceled("You can not build a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
+					return;
+				}
+			}
 		}
 	}
 	
