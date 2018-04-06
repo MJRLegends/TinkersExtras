@@ -14,6 +14,7 @@ import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolPartReplac
 import slimeknights.tconstruct.library.events.TinkerRegisterEvent.ModifierRegisterEvent;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
+import slimeknights.tconstruct.library.tinkering.IMaterialItem;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 public class EventHandlerMain {
@@ -95,6 +96,15 @@ public class EventHandlerMain {
 			}
 			for (String temp : Config.disablePartTypeCreationList) {
 				if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
+					event.setCanceled("You can not build a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
+					return;
+				}
+			}
+			for (String temp : Config.disablePartTypeBasedonMaterialCreationList) {
+				String partName = temp.substring(0, temp.indexOf(':'));
+				String materialName = temp.substring(temp.indexOf(':') + 1);
+				if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(partName.toLowerCase())
+						&& ((IMaterialItem) event.getItemStack().getItem()).getMaterial(event.getItemStack()).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
 					event.setCanceled("You can not build a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
 					return;
 				}
