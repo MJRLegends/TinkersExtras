@@ -16,6 +16,8 @@ public class Config {
 	public static boolean disableToolCreation;
 	public static String[] disablePartTypeCreationList;
 	
+	public static boolean outputToConsole;
+	
 	public static void load() {
 		Configuration config = new Configuration(new File("config/TinkersExtras.cfg"));
 		config.load();
@@ -34,6 +36,8 @@ public class Config {
 		disableToolCreation = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Create All Tools", false, "Will disable the creation of all tools via a tool station/forge").getBoolean(false);
 		
 		disablePartTypeCreationList = config.getStringList("List of Part Types That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use part type name. Example: pick_head");
+		
+		outputToConsole = config.get(Configuration.CATEGORY_GENERAL, "Output Materials/Modifier names to the Log/Console", false, "Will output to the Log/Console during start up").getBoolean(false);
 		
 		config.save();
 	}

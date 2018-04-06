@@ -2,19 +2,31 @@ package com.mjr.tinkersextras;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import org.apache.logging.log4j.LogManager;
+
 import slimeknights.tconstruct.library.events.MaterialEvent.IntegrationEvent;
 import slimeknights.tconstruct.library.events.MaterialEvent.MaterialRegisterEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolCraftingEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolModifyEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolPartCraftingEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolPartReplaceEvent;
+import slimeknights.tconstruct.library.events.TinkerRegisterEvent.ModifierRegisterEvent;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 public class EventHandlerMain {
 	@SubscribeEvent
+	public void onModifierRegister(ModifierRegisterEvent event) {
+		if (Config.outputToConsole)
+			LogManager.getLogger().info(TinkersExtras.MODID + ": Modifier: " + event.getRecipe().getIdentifier());
+	}
+
+	@SubscribeEvent
 	public void onMaterialRegister(MaterialRegisterEvent event) {
+		if (Config.outputToConsole)
+			LogManager.getLogger().info(TinkersExtras.MODID + ": Material: " + event.material.identifier);
 		for (String temp : Config.materialListRemoval)
 			if (event.material.identifier.equalsIgnoreCase(temp))
 				event.setCanceled(true);
@@ -88,7 +100,7 @@ public class EventHandlerMain {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onToolCrafting(ToolCraftingEvent event) {
 		if (Config.disableToolCreation) {
