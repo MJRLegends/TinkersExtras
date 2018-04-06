@@ -15,6 +15,7 @@ import slimeknights.tconstruct.library.events.TinkerRegisterEvent.ModifierRegist
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.tinkering.IMaterialItem;
+import slimeknights.tconstruct.library.tools.TinkerToolCore;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 public class EventHandlerMain {
@@ -119,7 +120,7 @@ public class EventHandlerMain {
 			return;
 		} else {
 			for (String temp : Config.disableToolCreationList) {
-				if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
+				if (((TinkerToolCore) event.getItemStack().getItem()).getIdentifier().toLowerCase().equals(temp.toLowerCase())) {
 					event.setCanceled("You can not create a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
 					return;
 				}
