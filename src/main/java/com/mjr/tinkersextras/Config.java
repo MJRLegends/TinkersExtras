@@ -32,10 +32,10 @@ public class Config {
 		disablePartCreationList = config.getStringList("List of Part That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: stone");
 		disablePartCreation = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Create All Parts", false, "Will only disable the creation not the existing of the parts").getBoolean(false);
 
-		disableToolCreationList = config.getStringList("List of Tool Types That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use tool type name (Use F3 + H to show unlocalized names on tools to find there names, will be the part after the : ) Example: pickaxe");
+		disableToolCreationList = config.getStringList("List of Tool Types That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use tool type name (Use F3 + H to show unlocalized names on tools to find there names, will be the name after the : ) Example: pickaxe");
 		disableToolCreation = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Create All Tools", false, "Will disable the creation of all tools via a tool station/forge").getBoolean(false);
 		
-		disablePartTypeCreationList = config.getStringList("List of Part Types That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use part type name (Use F3 + H to show unlocalized names on parts to find there names, will be the part after the : ) Example: pick_head");
+		disablePartTypeCreationList = config.getStringList("List of Part Types That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use part type name (Use F3 + H to show unlocalized names on parts to find there names, will be the name after the : ) Example: pick_head");
 		
 		outputToConsole = config.get(Configuration.CATEGORY_GENERAL, "Output Materials/Modifier names to the Log/Console", false, "Will output to the Log/Console during start up").getBoolean(false);
 		
