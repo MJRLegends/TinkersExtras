@@ -17,6 +17,7 @@ import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 public class EventHandlerMain {
+
 	@SubscribeEvent
 	public void onModifierRegister(ModifierRegisterEvent event) {
 		if (Config.outputToConsole)
