@@ -26,7 +26,7 @@ public class Config {
 		disableReplacingList = config.getStringList("List of Materials That Cant Be Used As Replacements", Configuration.CATEGORY_GENERAL, new String[0], "Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: stone");
 		disableReplacing = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Replace All Parts", false, "Will stop all Parts from being replaceable").getBoolean(false);
 
-		disableModifyingList = config.getStringList("List of Modifiers to Disable", Configuration.CATEGORY_GENERAL, new String[0], "Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: mending_moss");
+		disableModifyingList = config.getStringList("List of Modifiers to Disable", Configuration.CATEGORY_GENERAL, new String[0], "Use modifier name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: mending_moss");
 		disableModifying = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Apply All Modifiers", false, "Will disable all possible Modifiers").getBoolean(false);
 		
 		disablePartCreationList = config.getStringList("List of Part That Cant Be Created", Configuration.CATEGORY_GENERAL, new String[0], "Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: stone");
