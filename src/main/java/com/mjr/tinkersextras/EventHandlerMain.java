@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 
 import slimeknights.tconstruct.library.events.MaterialEvent.IntegrationEvent;
 import slimeknights.tconstruct.library.events.MaterialEvent.MaterialRegisterEvent;
+import slimeknights.tconstruct.library.events.MaterialEvent.TraitRegisterEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolCraftingEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolModifyEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolPartCraftingEvent;
@@ -132,6 +133,22 @@ public class EventHandlerMain {
 				if (((TinkerToolCore) event.getItemStack().getItem()).getIdentifier().toLowerCase().equals(toolName)
 						&& ((IMaterialItem) event.getToolParts().get(1).getItem()).getMaterial(event.getToolParts().get(1)).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
 					event.setCanceled("You can not create a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
+					return;
+				}
+			}
+		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@SubscribeEvent
+	public void onTraitRegister(TraitRegisterEvent event) {
+		if (Config.disableTraits) {
+			event.setCanceled(true);
+			return;
+		} else {
+			for (String temp : Config.disableTraitsList) {
+				if (temp.equalsIgnoreCase(event.trait.getIdentifier())) {
+					event.setCanceled(true);
 					return;
 				}
 			}
