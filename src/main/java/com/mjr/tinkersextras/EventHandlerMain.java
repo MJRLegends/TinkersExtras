@@ -121,24 +121,27 @@ public class EventHandlerMain {
 			return;
 		} else {
 			for (String temp : Config.disableToolCreationList) {
-				if (((TinkerToolCore) event.getItemStack().getItem()).getIdentifier().toLowerCase().equals(temp.toLowerCase())) {
-					event.setCanceled("You can not create a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
-					return;
+				if (event.getItemStack().getItem() instanceof TinkerToolCore) {
+					if (((TinkerToolCore) event.getItemStack().getItem()).getIdentifier().toLowerCase().equals(temp.toLowerCase())) {
+						event.setCanceled("You can not create a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
+						return;
+					}
 				}
 			}
 			for (String temp : Config.disableToolBasedonMaterialCreationList) {
 				String toolName = temp.substring(0, temp.indexOf(':'));
 				String materialName = temp.substring(temp.indexOf(':') + 1);
-				System.out.println(((TinkerToolCore) event.getItemStack().getItem()).getIdentifier());
-				if (((TinkerToolCore) event.getItemStack().getItem()).getIdentifier().toLowerCase().equals(toolName)
-						&& ((IMaterialItem) event.getToolParts().get(1).getItem()).getMaterial(event.getToolParts().get(1)).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
-					event.setCanceled("You can not create a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
-					return;
+				if (event.getItemStack().getItem() instanceof TinkerToolCore) {
+					if (((TinkerToolCore) event.getItemStack().getItem()).getIdentifier().toLowerCase().equals(toolName)
+							&& ((IMaterialItem) event.getToolParts().get(1).getItem()).getMaterial(event.getToolParts().get(1)).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
+						event.setCanceled("You can not create a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
+						return;
+					}
 				}
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@SubscribeEvent
 	public void onTraitRegister(TraitRegisterEvent event) {
