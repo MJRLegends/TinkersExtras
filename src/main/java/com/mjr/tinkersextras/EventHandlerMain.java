@@ -1,10 +1,9 @@
 package com.mjr.tinkersextras;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 import org.apache.logging.log4j.LogManager;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.events.MaterialEvent.IntegrationEvent;
 import slimeknights.tconstruct.library.events.MaterialEvent.MaterialRegisterEvent;
 import slimeknights.tconstruct.library.events.MaterialEvent.TraitRegisterEvent;
@@ -15,9 +14,12 @@ import slimeknights.tconstruct.library.events.TinkerCraftingEvent.ToolPartReplac
 import slimeknights.tconstruct.library.events.TinkerRegisterEvent.ModifierRegisterEvent;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
+import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 import slimeknights.tconstruct.library.tinkering.IMaterialItem;
+import slimeknights.tconstruct.library.tools.IToolPart;
 import slimeknights.tconstruct.library.tools.TinkerToolCore;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
+import slimeknights.tconstruct.smeltery.events.TinkerCastingEvent;
 
 public class EventHandlerMain {
 
@@ -86,7 +88,7 @@ public class EventHandlerMain {
 	@SubscribeEvent
 	public void onToolPartCrafting(ToolPartCraftingEvent event) {
 		Material material = TinkerUtil.getMaterialFromStack(event.getItemStack());
-		if (Config.disablePartCreation) {
+		if (Config.disablePartCreationPB) {
 			event.setCanceled("Creation of parts has been disabled!");
 			return;
 		} else {
@@ -96,18 +98,45 @@ public class EventHandlerMain {
 					return;
 				}
 			}
-			for (String temp : Config.disablePartTypeCreationList) {
+			for (String temp : Config.disablePartTypeCreationListPB) {
 				if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
 					event.setCanceled("You can not build a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
 					return;
 				}
 			}
-			for (String temp : Config.disablePartTypeBasedonMaterialCreationList) {
+			for (String temp : Config.disablePartTypeCreationListPB) {
 				String partName = temp.substring(0, temp.indexOf(':'));
 				String materialName = temp.substring(temp.indexOf(':') + 1);
 				if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(partName.toLowerCase())
 						&& ((IMaterialItem) event.getItemStack().getItem()).getMaterial(event.getItemStack()).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
 					event.setCanceled("You can not build a " + event.getItemStack().getDisplayName() + " due to its been disabled!");
+					return;
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onSmelteryPartCreation(TinkerCastingEvent.OnCasting event) {
+		CastingRecipe recipe = ((CastingRecipe) event.recipe);
+		ItemStack output = recipe.getResult();
+		for (String temp : Config.disablePartTypeCreationListSM) {
+			if (output.getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
+				event.setCanceled(true);
+				return;
+			}
+		}
+		if (output.getItem() instanceof IToolPart) {
+			if (Config.disablePartCreationSM) {
+				event.setCanceled(true);
+				return;
+			}
+			for (String temp : Config.disablePartTypeonMaterialListSM) {
+				String partName = temp.substring(0, temp.indexOf(':'));
+				String materialName = temp.substring(temp.indexOf(':') + 1);
+				IMaterialItem item = ((IMaterialItem) output.getItem());
+				if (output.getUnlocalizedName().toLowerCase().contains(partName.toLowerCase()) && item.getMaterial(output).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
+					event.setCanceled(true);
 					return;
 				}
 			}
@@ -128,7 +157,7 @@ public class EventHandlerMain {
 					}
 				}
 			}
-			for (String temp : Config.disableToolBasedonMaterialCreationList) {
+			for (String temp : Config.disableToolonMaterialList) {
 				String toolName = temp.substring(0, temp.indexOf(':'));
 				String materialName = temp.substring(temp.indexOf(':') + 1);
 				if (event.getItemStack().getItem() instanceof TinkerToolCore) {
