@@ -1,0 +1,38 @@
+﻿========================================Not Released Updates==========================================
+
+======================================================================================================
+
+
+
+===========================================Released Updates===========================================
+v1.0.6
+*Tweaks to config options
+*Fixed issue #8
+*Updated Main class/build.gradle with jar signing and curseforge upload
+
+v1.0.5
+*Fixed issue #5
+
+v1.0.4
+*Added ability to disable all or certain traits via the config
+
+v1.0.3
+*Added ability to output Material/Modifier names to the log
+*Tweaks to comments in config to make them more understand
+*Fixed a typo on config option comment
+*Added ability to disable creation of Parts based on certain Materials
+*Changed most config options, text to be more clear (Might be best to regenerate your config)
+*Fixed issue with disabling certain tools also disabling ones with similar names
+*Added ability to disable creation of Tools based on certain Materials
+
+v1.0.2
+*Added the ability to disable creation of certain types of tools
+*Added the ability to disable creation of all tools
+*Added the ability to disable creation of certain types of parts
+
+v1.0.1
+*Fixed crashing issue
+
+v1.0.0
+*First Release
+======================================================================================================
