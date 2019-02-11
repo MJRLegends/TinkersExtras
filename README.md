@@ -1,3 +1,5 @@
+[![](http://cf.way2muchnoise.eu/full_tinkersextras_downloads.svg)](https://minecraft.curseforge.com/projects/tinkersextras) [![](http://cf.way2muchnoise.eu/versions/Minecraft_tinkersextras_all.svg)](https://minecraft.curseforge.com/projects/tinkersextras)
+
 # Tinkers-Extras
 A tweaks mod for TinkersConstruct to disable certain elements of the mod
 
