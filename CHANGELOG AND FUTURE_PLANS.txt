@@ -9,6 +9,7 @@ v1.0.6
 *Tweaks to config options
 *Fixed issue #8
 *Updated Main class/build.gradle with jar signing and curseforge upload
+*Fixed missing config option interaction with Smeltery Casting table
 
 v1.0.5
 *Fixed issue #5
