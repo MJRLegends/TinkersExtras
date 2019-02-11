@@ -5,6 +5,9 @@
 
 
 ===========================================Released Updates===========================================
+v1.0.7
+*Fixed issue #7
+
 v1.0.6
 *Tweaks to config options
 *Fixed issue #8
