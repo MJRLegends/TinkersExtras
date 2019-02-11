@@ -34,6 +34,7 @@ public class Config {
 		config.load();
 		
 		config.renameProperty(Configuration.CATEGORY_GENERAL, "Disable Ability to Create All Parts", "Disable Ability to Create All Parts in the Part Builder");
+		config.renameProperty(Configuration.CATEGORY_GENERAL, "List of Materials which parts cant be created for", "List of Materials which parts cant be created for using a Part Builder/Smeltery Casting table");
 		
 		disableReplacing = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Replace All Parts", false, "Will stop all Parts from being replaceable").getBoolean(false);
 		disableModifying = config.get(Configuration.CATEGORY_GENERAL, "Disable Ability to Apply All Modifiers", false, "Will disable all possible Modifiers").getBoolean(false);
@@ -45,7 +46,7 @@ public class Config {
 		materialListRemoval = config.getStringList("List of Materials to be disabled", Configuration.CATEGORY_GENERAL, new String[0], "Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: paper");
 		disableReplacingList = config.getStringList("List of Materials which cant be used as replacements on tools", Configuration.CATEGORY_GENERAL, new String[0], "Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: stone");
 		disableModifyingList = config.getStringList("List of Modifiers to be disabled", Configuration.CATEGORY_GENERAL, new String[0], "Use modifier name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: mending_moss");
-		disablePartCreationList = config.getStringList("List of Materials which parts cant be created for", Configuration.CATEGORY_GENERAL, new String[0], "Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: stone");
+		disablePartCreationList = config.getStringList("List of Materials which parts cant be created for using a Part Builder/Smeltery Casting table", Configuration.CATEGORY_GENERAL, new String[0], "Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: stone");
 		
 		config.renameProperty(Configuration.CATEGORY_GENERAL, "List of Parts that cant be created", "List of Parts that cant be created in the Part Builder");
 		config.renameProperty(Configuration.CATEGORY_GENERAL, "List of Parts based on certain Materials that cant be created", "List of Parts that cant be created in the Part Builder (based on certain Material type)");

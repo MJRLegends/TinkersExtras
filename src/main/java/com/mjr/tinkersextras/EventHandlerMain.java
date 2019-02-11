@@ -131,10 +131,16 @@ public class EventHandlerMain {
 				event.setCanceled(true);
 				return;
 			}
+			IMaterialItem item = ((IMaterialItem) output.getItem());
+			for (String temp : Config.disablePartCreationList) {
+				if (item.getMaterial(output).getIdentifier().equalsIgnoreCase(temp)) {
+					event.setCanceled(true);
+					return;
+				}
+			}
 			for (String temp : Config.disablePartTypeonMaterialListSM) {
 				String partName = temp.substring(0, temp.indexOf(':'));
 				String materialName = temp.substring(temp.indexOf(':') + 1);
-				IMaterialItem item = ((IMaterialItem) output.getItem());
 				if (output.getUnlocalizedName().toLowerCase().contains(partName.toLowerCase()) && item.getMaterial(output).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
 					event.setCanceled(true);
 					return;
