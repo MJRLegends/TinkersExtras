@@ -80,7 +80,7 @@ curseforge {
 	if (project.hasProperty("curseforge_key")) {
 		apiKey = project.findProperty("curseforge_key")
 		project {
-			id = "284331"
+			id = "285238"
 			releaseType = "release"
 			addGameVersion "${minecraft_version}"
 			mainArtifact(jar) {
