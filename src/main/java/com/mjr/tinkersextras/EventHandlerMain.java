@@ -104,7 +104,7 @@ public class EventHandlerMain {
 					return;
 				}
 			}
-			for (String temp : Config.disablePartTypeCreationListPB) {
+			for (String temp : Config.disablePartTypeonMaterialListPB) {
 				String partName = temp.substring(0, temp.indexOf(':'));
 				String materialName = temp.substring(temp.indexOf(':') + 1);
 				if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(partName.toLowerCase())
