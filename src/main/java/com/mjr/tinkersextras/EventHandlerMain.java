@@ -119,7 +119,11 @@ public class EventHandlerMain {
 	@SubscribeEvent
 	public void onSmelteryPartCreation(TinkerCastingEvent.OnCasting event) {
 		CastingRecipe recipe = ((CastingRecipe) event.recipe);
+		if(recipe == null)
+			return;
 		ItemStack output = recipe.getResult();
+		if(output == null)
+			return;
 		for (String temp : Config.disablePartTypeCreationListSM) {
 			if (output.getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
 				event.setCanceled(true);
