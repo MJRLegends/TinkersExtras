@@ -118,36 +118,38 @@ public class EventHandlerMain {
 
 	@SubscribeEvent
 	public void onSmelteryPartCreation(TinkerCastingEvent.OnCasting event) {
-		CastingRecipe recipe = ((CastingRecipe) event.recipe);
-		if(recipe == null)
-			return;
-		ItemStack output = recipe.getResult();
-		if(output == null)
-			return;
-		for (String temp : Config.disablePartTypeCreationListSM) {
-			if (output.getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
-				event.setCanceled(true);
+		if (event.recipe instanceof CastingRecipe) {
+			CastingRecipe recipe = ((CastingRecipe) event.recipe);
+			if (recipe == null)
 				return;
-			}
-		}
-		if (output.getItem() instanceof IToolPart) {
-			if (Config.disablePartCreationSM) {
-				event.setCanceled(true);
+			ItemStack output = recipe.getResult();
+			if (output == null)
 				return;
-			}
-			IMaterialItem item = ((IMaterialItem) output.getItem());
-			for (String temp : Config.disablePartCreationList) {
-				if (item.getMaterial(output).getIdentifier().equalsIgnoreCase(temp)) {
+			for (String temp : Config.disablePartTypeCreationListSM) {
+				if (output.getUnlocalizedName().toLowerCase().contains(temp.toLowerCase())) {
 					event.setCanceled(true);
 					return;
 				}
 			}
-			for (String temp : Config.disablePartTypeonMaterialListSM) {
-				String partName = temp.substring(0, temp.indexOf(':'));
-				String materialName = temp.substring(temp.indexOf(':') + 1);
-				if (output.getUnlocalizedName().toLowerCase().contains(partName.toLowerCase()) && item.getMaterial(output).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
+			if (output.getItem() instanceof IToolPart) {
+				if (Config.disablePartCreationSM) {
 					event.setCanceled(true);
 					return;
+				}
+				IMaterialItem item = ((IMaterialItem) output.getItem());
+				for (String temp : Config.disablePartCreationList) {
+					if (item.getMaterial(output).getIdentifier().equalsIgnoreCase(temp)) {
+						event.setCanceled(true);
+						return;
+					}
+				}
+				for (String temp : Config.disablePartTypeonMaterialListSM) {
+					String partName = temp.substring(0, temp.indexOf(':'));
+					String materialName = temp.substring(temp.indexOf(':') + 1);
+					if (output.getUnlocalizedName().toLowerCase().contains(partName.toLowerCase()) && item.getMaterial(output).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
+						event.setCanceled(true);
+						return;
+					}
 				}
 			}
 		}
