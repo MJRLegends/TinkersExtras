@@ -5,6 +5,10 @@
 
 
 ===========================================Released Updates===========================================
+v1.1.0
+*Added categories to the config to make it easier to read, Added replacing config option for replacing items based on part & material #17
+*Added a modifier limit config option #16
+
 v1.0.9
 *Fixed issue #11
 
