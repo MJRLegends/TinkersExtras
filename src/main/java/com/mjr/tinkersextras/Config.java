@@ -16,6 +16,7 @@ public class Config {
 	public static String[] disableReplacingList;
 	public static String[] disableReplacingMaterialListPB;
 	public static String[] disableModifyingList;
+	public static int modifyingLimit;
 	public static String[] disablePartCreationList;
 
 	public static String[] disablePartTypeCreationListPB;
@@ -79,10 +80,11 @@ public class Config {
 				"Use material name ('Use Output Materials names to the Log/Console' option to show all materials) Example: stone");
 		disableReplacingMaterialListPB = config.getStringList("List of parts which cant be used as replacements on tools (based on certain Material type)", CONFIG_CATEGORY_EXTRAS, new String[0],
 				"Use part name and material name in the Format: part_name:material_name Example: pick_head:stone");
-		
-		
+
 		disableModifyingList = config.getStringList("List of Modifiers to be disabled", CONFIG_CATEGORY_EXTRAS, new String[0],
 				"Use modifier name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: mending_moss");
+
+		modifyingLimit = config.get(CONFIG_CATEGORY_EXTRAS, "Modifier limit amount (per tool)", 10, "Will set a limit on the amount of Modifiers allowed on a tool at once!").getInt(10);
 
 		disablePartCreationList = config.getStringList("List of Materials which parts cant be created for using a Part Builder/Smeltery Casting table", CONFIG_CATEGORY_PARTS_GENERAL, new String[0],
 				"Use material name ('Use Output Materials/Modifier names to the Log/Console' option to show all materials) Example: stone");

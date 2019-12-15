@@ -1,5 +1,7 @@
 package com.mjr.tinkersextras;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 
 import net.minecraft.item.ItemStack;
@@ -79,6 +81,17 @@ public class EventHandlerMain {
 
 	@SubscribeEvent
 	public void ToolModify(ToolModifyEvent event) {
+		List<IModifier> currentModifiers = TinkerUtil.getModifiers(event.getToolBeforeModification());
+		if (currentModifiers.size() >= Config.modifyingLimit) {
+			event.setCanceled("You can not add any more Modifiers due to you have reached max allowed for this item!");
+			return;
+		} else if ((currentModifiers.size() + event.getModifiers().size()) > Config.modifyingLimit) {
+			if(event.getModifiers().size() != 1)
+				event.setCanceled("You can not add all of these Modifiers due to it will bring you over the max allowed for this item!");
+			else
+				event.setCanceled("You can not add this Modifiers due it will bring you over the max allowed for this item!");
+			return;
+		}
 		if (Config.disableModifying) {
 			event.setCanceled("The use of Modifiers has been disabled!");
 			return;
