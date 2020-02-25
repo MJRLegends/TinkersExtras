@@ -1,3 +1,12 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: needs investigating
+assignees: MJRLegends
+
+---
+
 ### ---Issue Report---
 **(PLEASE DONT DELETE THIS TEMPLATE, YOUR ISSUE WILL BE IGNORED AND CLOSED IF YOU DO.)**
 
