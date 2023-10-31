@@ -1,6 +1,4 @@
 def minecraft_version="1.12.2"
-def tconstruct_version="2.9.0.55"
-def mantle_version="1.3.1.22"
 
 buildscript {
     repositories {
@@ -19,6 +17,10 @@ repositories {
     maven { // Mantle, TCon, JEI
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven/'
+    }
+    maven {
+        name 'CurseMaven'
+        url 'https://www.cursemaven.com'
     }
 }
 
@@ -42,13 +44,8 @@ minecraft {
 }
 
 dependencies {
-    deobfCompile ("slimeknights:TConstruct:${minecraft_version}-${tconstruct_version}") {
-        exclude group: 'mezz.jei'
-    }
-
-    deobfCompile ("slimeknights.mantle:Mantle:1.12-${mantle_version}") {
-        exclude group: 'mezz.jei'
-    }
+    deobfCompile "curse.maven:mantle-74924:2713386"
+    deobfCompile "curse.maven:tinkers-construct-74072:2902483"
 }
 
 processResources
