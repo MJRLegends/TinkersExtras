@@ -68,10 +68,12 @@ public class EventHandlerMain {
 					for (String list : Config.disableReplacingMaterialListPB) {
 						String partName = list.substring(0, list.indexOf(':'));
 						String materialName = list.substring(list.indexOf(':') + 1);
-						if (event.getItemStack().getUnlocalizedName().toLowerCase().contains(partName.toLowerCase())
-								&& ((IMaterialItem) event.getItemStack().getItem()).getMaterial(event.getItemStack()).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
-							event.setCanceled("You can not use " + temp.getDisplayName() + " as a replacement part!");
-							return;
+						for(ItemStack itemstack : event.getToolParts()) {
+							if (itemstack.getUnlocalizedName().toLowerCase().contains(partName.toLowerCase())
+									&& ((IMaterialItem) itemstack.getItem()).getMaterial(itemstack).getIdentifier().toLowerCase().equals(materialName.toLowerCase())) {
+								event.setCanceled("You can not use " + temp.getDisplayName() + " as a replacement part!");
+								return;
+							}
 						}
 					}
 				}
